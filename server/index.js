@@ -1,14 +1,16 @@
-const express = 'express';
-const cors = 'cors';
-const helmet = 'helmet';
-const rateLimit = 'express-rate-limit';
-const dotenv = 'dotenv';
-const { connectDatabase } = './config/database.js';
-const { postsRouter } = './routes/posts.js';
-const { commentsRouter } = './routes/comments.js';
-const { adminRouter } = './routes/admin.js';
-const { uploadRouter } = './routes/upload.js';
-const { errorHandler } = './middleware/errorHandler.js';
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import dotenv from 'dotenv';
+import { connectDatabase } from './config/database.js';
+import { postsRouter } from './routes/posts.js';
+import { commentsRouter } from './routes/comments.js';
+import { adminRouter } from './routes/admin.js';
+import { uploadRouter } from './routes/upload.js';
+import { errorHandler } from './middleware/errorHandler.js';
+import cookieParser from 'cookie-parser';
+
 
 dotenv.config();
 
@@ -19,15 +21,11 @@ connectDatabase();
 
 // Middleware
 
+app.use(cookieParser());
 
 app.use(cors({
   origin: [
-    'https://mood-tracker-3m3icapmr-ussyalfaks-projects.vercel.app',
-    'https://mood-tracker-jtu6xapf9-ussyalfaks-projects.vercel.app',
-    'https://mood-tracker-eta-two.vercel.app',
-    'https://mood-tracker-git-main-ussyalfaks-projects.vercel.app',
-    'https://mood-tracker-11zeigmtq-ussyalfaks-projects.vercel.app'
-
+    'https://kddcommuni.vercel.app/',
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
