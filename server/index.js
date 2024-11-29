@@ -21,11 +21,10 @@ connectDatabase();
 
 // Middleware
 
-app.use(cookieParser());
 
 app.use(cors({
   origin: [
-    'https://kddcommuni.vercel.app/',
+    'https://kddcommuni.vercel.app',
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -33,10 +32,11 @@ app.use(cors({
   preflightContinue: false,
 }));
 
+app.options('*', cors());
 
-
-app.use(helmet());
 app.use(express.json());
+app.use(helmet());
+app.use(cookieParser());
 
 // Rate limiting
 const limiter = rateLimit({
