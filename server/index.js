@@ -1,30 +1,42 @@
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
-const dotenv = require('dotenv');
-const { connectDatabase } = require('./config/database.js');
-const { postsRouter } = require('./routes/posts.js');
-const { commentsRouter } = require('./routes/comments.js');
-const { adminRouter } = require('./routes/admin.js');
-const { uploadRouter } = require('./routes/upload.js');
-const { errorHandler } = require('./middleware/errorHandler.js');
+const express = 'express';
+const cors = 'cors';
+const helmet = 'helmet';
+const rateLimit = 'express-rate-limit';
+const dotenv = 'dotenv';
+const { connectDatabase } = './config/database.js';
+const { postsRouter } = './routes/posts.js';
+const { commentsRouter } = './routes/comments.js';
+const { adminRouter } = './routes/admin.js';
+const { uploadRouter } = './routes/upload.js';
+const { errorHandler } = './middleware/errorHandler.js';
 
 dotenv.config();
 
 const app = express();    
-const PORT = process.env.PORT || 5000;
-app.set('trust proxy', 1);
+const PORT = process.env.PORT || 10000;
 // Connect to MongoDB
 connectDatabase();
 
 // Middleware
+
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? process.env.FRONTEND_URL 
-    : 'https://kddcommuni.vercel.app/',
-  credentials: true
+  origin: [
+    'https://mood-tracker-3m3icapmr-ussyalfaks-projects.vercel.app',
+    'https://mood-tracker-jtu6xapf9-ussyalfaks-projects.vercel.app',
+    'https://mood-tracker-eta-two.vercel.app',
+    'https://mood-tracker-git-main-ussyalfaks-projects.vercel.app',
+    'https://mood-tracker-11zeigmtq-ussyalfaks-projects.vercel.app'
+
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  preflightContinue: false,
 }));
+
+
+
 app.use(helmet());
 app.use(express.json());
 
@@ -44,5 +56,7 @@ app.use('/api/upload', uploadRouter);
 // Error handling
 app.use(errorHandler);
 
-// Export the app to work with Vercel serverless functions
-export default app;
+// Start server
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on http://0.0.0.0:${PORT}`);
+});
