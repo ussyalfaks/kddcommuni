@@ -1,14 +1,14 @@
-import express from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
-import dotenv from 'dotenv';
-import { connectDatabase } from './config/database.js';
-import { postsRouter } from './routes/posts.js';
-import { commentsRouter } from './routes/comments.js';
-import { adminRouter } from './routes/admin.js';
-import { uploadRouter } from './routes/upload.js';
-import { errorHandler } from './middleware/errorHandler.js';
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const dotenv = require('dotenv');
+const { connectDatabase } = require('./config/database.js');
+const { postsRouter } = require('./routes/posts.js');
+const { commentsRouter } = require('./routes/comments.js');
+const { adminRouter } = require('./routes/admin.js');
+const { uploadRouter } = require('./routes/upload.js');
+const { errorHandler } = require('./middleware/errorHandler.js');
 
 dotenv.config();
 
