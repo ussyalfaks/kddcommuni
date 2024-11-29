@@ -16,6 +16,9 @@ dotenv.config();
 
 const app = express();    
 const PORT = process.env.PORT || 10000;
+app.get('/', (req, res) => {
+  res.send('App is running');
+});
 // Connect to MongoDB
 connectDatabase();
 
@@ -25,6 +28,8 @@ connectDatabase();
 app.use(cors({
   origin: [
     'https://kddcommuni.vercel.app',
+    'https://kddcommuni-git-main-ussyalfaks-projects.vercel.app/',
+    'https://kddcommuni-10edshh3v-ussyalfaks-projects.vercel.app/',
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
