@@ -1,0 +1,49 @@
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import dotenv from 'dotenv';
+import { connectDatabase } from './config/database.js';
+import { postsRouter } from './routes/posts.js';
+import { commentsRouter } from './routes/comments.js';
+import { adminRouter } from './routes/admin.js';
+import { uploadRouter } from './routes/upload.js';
+import { errorHandler } from './middleware/errorHandler.js';
+
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Connect to MongoDB
+connectDatabase();
+
+// Middleware
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? process.env.FRONTEND_URL 
+    : 'http://localhost:5173',
+  credentials: true
+}));
+app.use(helmet());
+app.use(express.json());
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+app.use(limiter);
+
+// Routes
+app.use('/api/posts', postsRouter);
+app.use('/api/comments', commentsRouter);
+app.use('/api/admin', adminRouter);
+app.use('/api/upload', uploadRouter);
+
+// Error handling
+app.use(errorHandler);
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
