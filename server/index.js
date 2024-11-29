@@ -44,6 +44,5 @@ app.use('/api/upload', uploadRouter);
 // Error handling
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Export the app to work with Vercel serverless functions
+export default app;
