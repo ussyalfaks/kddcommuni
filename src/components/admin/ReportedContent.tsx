@@ -2,6 +2,13 @@ import React from 'react';
 import { Flag, CheckCircle, XCircle } from 'lucide-react';
 import { useReportedContent } from '../../hooks/useReportedContent';
 
+// Define the type for the report object
+interface Report {
+  id: string;
+  reason: string;
+  postTitle: string;
+}
+
 export function ReportedContent() {
   const { data: reports, isLoading, approveReport, rejectReport } = useReportedContent();
 
@@ -15,7 +22,7 @@ export function ReportedContent() {
         <h2 className="text-lg font-medium text-gray-900">Reported Content</h2>
         <div className="mt-6 flow-root">
           <ul className="-my-5 divide-y divide-gray-200">
-            {reports?.map((report) => (
+            {reports?.map((report: Report) => (
               <li key={report.id} className="py-5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">

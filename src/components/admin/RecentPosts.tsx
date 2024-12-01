@@ -2,6 +2,14 @@ import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { useRecentPosts } from '../../hooks/useRecentPosts';
 
+// Define the type for the post object
+interface Post {
+  id: string;
+  title: string;
+  location: string;
+  createdAt: string;
+}
+
 export function RecentPosts() {
   const { data: posts, isLoading } = useRecentPosts();
 
@@ -15,7 +23,7 @@ export function RecentPosts() {
         <h2 className="text-lg font-medium text-gray-900">Recent Posts</h2>
         <div className="mt-6 flow-root">
           <ul className="-my-5 divide-y divide-gray-200">
-            {posts?.map((post) => (
+            {posts?.map((post: Post) => (
               <li key={post.id} className="py-5">
                 <div className="flex items-center space-x-4">
                   <div className="flex-1 min-w-0">

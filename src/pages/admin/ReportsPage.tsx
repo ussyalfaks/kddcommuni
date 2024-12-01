@@ -2,6 +2,14 @@ import React from 'react';
 import { useReportedContent } from '../../hooks/useReportedContent';
 import { Loader } from '../../components/ui/Loader';
 
+interface Report {
+  id: string;
+  postTitle: string;
+  reason: string;
+  count: number;
+  createdAt: string;
+}
+
 export function ReportsPage() {
   const { data: reports, isLoading, approveReport, rejectReport } = useReportedContent();
 
@@ -15,14 +23,22 @@ export function ReportsPage() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Content</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reports</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Content
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Reports
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Date
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {reports?.map((report) => (
+            {reports?.map((report: Report) => (
               <tr key={report.id}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-900">{report.postTitle}</div>

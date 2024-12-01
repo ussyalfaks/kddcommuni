@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { ImagePlus, MapPin } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { ImageUpload } from './ImageUpload';
 import { LocationSelect } from './LocationSelect';
@@ -13,7 +12,7 @@ export function PostForm({ onSuccess }: PostFormProps) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
-  const [imageUrl, setImageUrl] = useState<string>();
+  const [imageUrl, setImageUrl] = useState<string | undefined>();
   const [isAnonymous, setIsAnonymous] = useState(false);
   const createPost = useCreatePost();
 
@@ -21,21 +20,22 @@ export function PostForm({ onSuccess }: PostFormProps) {
     e.preventDefault();
     if (!title.trim() || !description.trim() || !location) return;
 
+    // Create a FormData object
+    const formData = new FormData();
+    formData.append('title', title.trim());
+    formData.append('description', description.trim());
+    formData.append('location', location);
+    if (imageUrl) {
+      formData.append('imageUrl', imageUrl);
+    }
+    formData.append('anonymous', isAnonymous.toString());
+
     try {
-      await createPost.mutate(
-        {
-          title: title.trim(),
-          description: description.trim(),
-          location,
-          imageUrl,
-          anonymous: isAnonymous,
+      await createPost.mutate(formData, {
+        onSuccess: () => {
+          onSuccess?.();
         },
-        {
-          onSuccess: () => {
-            onSuccess?.();
-          },
-        }
-      );
+      });
     } catch (error) {
       console.error('Failed to create post:', error);
     }
@@ -73,15 +73,9 @@ export function PostForm({ onSuccess }: PostFormProps) {
         />
       </div>
 
-      <LocationSelect
-        value={location}
-        onChange={setLocation}
-      />
+      <LocationSelect value={location} onChange={setLocation} />
 
-      <ImageUpload
-        value={imageUrl}
-        onChange={setImageUrl}
-      />
+      <ImageUpload value={imageUrl} onChange={setImageUrl} />
 
       <div className="flex items-center">
         <input
