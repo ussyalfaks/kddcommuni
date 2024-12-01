@@ -43,6 +43,9 @@ app.use(express.json());
 app.use(helmet());
 app.use(cookieParser());
 
+// Enable trust proxy for handling X-Forwarded-For header
+app.set('trust proxy', true);
+
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
