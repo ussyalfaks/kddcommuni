@@ -13,7 +13,7 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <StatsCard
           title="Total Posts"
           value={stats?.totalPosts}
@@ -31,12 +31,6 @@ export function DashboardPage() {
           value={`${stats?.engagement}%`}
           change={stats?.engagementChange}
           trend="up"
-        />
-        <StatsCard
-          title="Response Time"
-          value={`${stats?.responseTime}h`}
-          change={stats?.responseTimeChange}
-          trend="down"
         />
       </div>
 

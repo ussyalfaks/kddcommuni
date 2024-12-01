@@ -5,7 +5,6 @@ import {
   MessageSquare, 
   Flag,
   Users,
-  BarChart,
   Settings
 } from 'lucide-react';
 
@@ -14,7 +13,6 @@ const navItems = [
   { icon: MessageSquare, label: 'Posts', path: '/admin/posts' },
   { icon: Flag, label: 'Reports', path: '/admin/reports' },
   { icon: Users, label: 'Users', path: '/admin/users' },
-  { icon: BarChart, label: 'Analytics', path: '/admin/analytics' },
   { icon: Settings, label: 'Settings', path: '/admin/settings' },
 ];
 

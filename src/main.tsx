@@ -1,10 +1,24 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
+import { RouterProvider } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query'; // Import React Query components
+import { router } from './routes';
 import './index.css';
+
+// Create a QueryClient instance
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    {/* Wrap the app with QueryClientProvider */}
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider 
+        router={router} 
+        future={{ 
+          v7_startTransition: true,
+          v7_relativeSplatPath: true
+        }} 
+      />
+    </QueryClientProvider>
   </StrictMode>
 );

@@ -1,5 +1,5 @@
 import multer from 'multer';
-import cloudinary from 'cloudinary';
+import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import dotenv from 'dotenv';
 
@@ -14,7 +14,7 @@ cloudinary.config({
 
 // Configure Multer + Cloudinary storage
 const storage = new CloudinaryStorage({
-  cloudinary: cloudinary.v2,
+  cloudinary: cloudinary,
   params: {
     folder: 'kaduna-community',
     allowed_formats: ['jpg', 'jpeg', 'png', 'gif'],
@@ -33,7 +33,7 @@ export const upload = multer({
 // Helper function to delete file from Cloudinary
 export const deleteFile = async (publicId) => {
   try {
-    await cloudinary.v2.uploader.destroy(publicId);
+    await cloudinary.uploader.destroy(publicId);
   } catch (error) {
     console.error('Error deleting file from Cloudinary:', error);
   }

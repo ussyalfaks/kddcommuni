@@ -3,9 +3,6 @@ const { v2: cloudinary } = pkg;
 
 import dotenv from 'dotenv';
 
-
-
-
 dotenv.config();
 
 cloudinary.config({

@@ -1,12 +1,11 @@
 import axios from 'axios';
 
-const API_URL = 'https://kddcommuni.onrender.com/api';
-
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: 'https://kddcommuni.onrender.com/api',
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
 // Add auth token to requests
@@ -17,6 +16,18 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+
+// Handle network errors
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (!error.response) {
+      console.error('Network error occurred');
+      return Promise.reject(new Error('Network error occurred. Please check your connection.'));
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const adminApi = {
   register: async (email: string, password: string) => {
@@ -66,14 +77,12 @@ export const postsApi = {
     return response.data;
   },
 
-  createPost: async (data: {
-    title: string;
-    description: string;
-    location: string;
-    imageUrl?: string;
-    anonymous: boolean;
-  }) => {
-    const response = await api.post('/posts', data);
+  createPost: async (data: FormData) => {
+    const response = await api.post('/posts', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     return response.data;
   },
 
