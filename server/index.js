@@ -27,11 +27,11 @@ connectDatabase();
 
 app.use(cors({
   origin: [
-    'https://kddcommuni.vercel.app',
-    'https://kddcommuni-git-main-ussyalfaks-projects.vercel.app/',
+    'https://kddcommuni.vercel.app', // Allow this origin
+    'https://kddcommuni-git-main-ussyalfaks-projects.vercel.app/', 
     'https://kddcommuni-10edshh3v-ussyalfaks-projects.vercel.app/',
   ],
-  credentials: true,
+  credentials: true, // Allows cookies to be sent with requests
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   preflightContinue: false,
