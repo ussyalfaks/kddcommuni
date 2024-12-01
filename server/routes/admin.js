@@ -1,6 +1,5 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
 import { Post } from '../models/Post.js';
 import { Admin } from '../models/Admin.js';
 import { asyncHandler } from '../middleware/asyncHandler.js';
