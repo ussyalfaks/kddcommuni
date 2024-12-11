@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MessageCircle, ThumbsUp, Flag, MapPin } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { Post } from '../../types';

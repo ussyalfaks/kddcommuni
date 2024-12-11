@@ -1,4 +1,3 @@
-import React from 'react';
 import { usePosts } from '../../hooks/usePosts';
 import { PostCard } from '../../components/post/PostCard';
 import { Loader } from '../../components/ui/Loader';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useReportedContent } from '../../hooks/useReportedContent';
 import { Loader } from '../../components/ui/Loader';
 
