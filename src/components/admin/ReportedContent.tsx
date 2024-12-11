@@ -1,4 +1,3 @@
-import React from 'react';
 import { Flag, CheckCircle, XCircle } from 'lucide-react';
 import { useReportedContent } from '../../hooks/useReportedContent';
 

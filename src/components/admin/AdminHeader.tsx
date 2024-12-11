@@ -1,4 +1,3 @@
-import React from 'react';
 import { Settings, LogOut } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 
