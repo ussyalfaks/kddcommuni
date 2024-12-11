@@ -1,4 +1,3 @@
-import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { useComments } from '../../hooks/useComments';
 import { Comment } from '../../types';
