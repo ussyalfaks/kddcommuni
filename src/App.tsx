@@ -1,4 +1,3 @@
-import React from 'react';
 import { QueryClientProvider } from 'react-query';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { queryClient } from './lib/queryClient'; // Import your queryClient
